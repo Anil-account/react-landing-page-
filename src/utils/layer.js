@@ -31,6 +31,23 @@ export function init() {
   scene.add(model);
   });
 
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setAnimationLoop(animation);
+  renderer.setClearColor(0x272727, 1);
+  document.body.appendChild(renderer.domElement);
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+  });
+
+  function animation() {
+    renderer.render(scene, camera);
+  }
 }
 
 // animation
